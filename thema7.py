@@ -1,0 +1,56 @@
+#!/usr/bin/env python
+# -*- coding: iso-8859-7 -*-
+
+#апаяаитгтес бибкиохгйес циа то пяоцяалла
+import urllib2,json
+
+
+#ояислос сумаятгсгс ле тис сумтетацлемес йахе выяас 
+def fetchHTML(x,y):
+    URL = "http://api.openweathermap.org/data/2.5/weather?lat="+y+"&lon="+x+"&appid=390f40f8ee6f923bba8b8b6726443618&units=metric"
+    req = urllib2.Request(URL)
+    response=urllib2.urlopen (req)
+    return response.read()
+
+
+#еисацыцг сумтетацлемым апто вягстг
+lon=(raw_input ("дысте тгм тетлглемг X : "))
+lat=(raw_input ("дысте тгм тетацлемг Y : "))
+
+
+
+output=fetchHTML(lon,lat)
+data=json.loads(output)
+temp = float (str(data['main']['temp']))
+
+
+#ейтупысг йаияоу
+print ("")
+print "выяа:  "+str(data['sys']['country'])
+print "покг:  "+str(data['name'])
+print "йаияос:  "+str(data['weather'][0]['main'])
+print "хеялойяасиа:  "+str(data['main']['temp'])
+print "уцяасиа:  "+str(data['main']['humidity'])
+print "пиесг: "+str(data['main']['pressure']) 
+print "тавутгта амелоу:  "+str(data['wind']['speed'])
+print "епипедо хакассас:  "+str(data['main']['sea_level'])
+print "епипедо едажоус:  "+str(data['main']['grnd_level'])
+print "аматокг гкиоу:  "+str(data['sys']['sunrise'])
+print "дусг Hкиоу:  "+str(data['sys']['sunset'])
+
+
+#сумхгйг IF циа бяовг йаи хеялойяасиа
+if str(data['weather'][0]['main']) == "Rain" :
+     print "I'm singing in the rain!"
+
+if temp > 20:
+    print "Nice..."
+
+if temp < 5:
+    print "brrrrr"
+
+
+
+
+    
+   
